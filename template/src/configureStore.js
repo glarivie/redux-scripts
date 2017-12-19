@@ -1,0 +1,25 @@
+import { createStore, applyMiddleware, compose } from 'redux'
+import thunkMiddleware from 'redux-thunk'
+import { get } from 'lodash'
+
+import rootReducer from './reducers'
+
+const NODE_ENV = get(process.env, 'NODE_ENV', 'development')
+const { devToolsExtension } = window
+const isDevelopment = NODE_ENV === 'development'
+
+const store = createStore(
+  rootReducer,
+  undefined, // Initial state
+  compose(
+    applyMiddleware(thunkMiddleware),
+    devToolsExtension && isDevelopment ? devToolsExtension() : f => f,
+  ),
+)
+
+if (module.hot) {
+  // Enable Webpack hot module replacement for reducers
+  module.hot.accept('./reducers', () => store.replaceReducer(rootReducer))
+}
+
+export default store

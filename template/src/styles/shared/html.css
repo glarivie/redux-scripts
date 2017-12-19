@@ -1,0 +1,52 @@
+* {
+  box-sizing: border-box;
+  outline: none;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-family: 'Segoe UI', 'Helvetica', 'Droid Sans', Arial, sans-serif;
+  font-weight: 300;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  cursor: pointer;
+}
+
+hr {
+  background-color: transparent;
+  margin: 15px 0;
+  width: 100%;
+  border-width: 0;
+  border-color: transparent;
+}
+
+strong {
+  font-weight: 900;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+ul > li {
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  margin: 0;
+}
+
+select {
+  outline: none;
+}
