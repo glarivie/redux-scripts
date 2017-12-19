@@ -3,7 +3,7 @@ import { findDOMNode } from 'react-dom'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Helmet } from 'react-helmet'
-import { debounce } from 'lodash'
+import { get, debounce } from 'lodash'
 
 import actions from 'actions'
 import { Flex } from 'components'

@@ -33,14 +33,36 @@ module.exports = function(
   const useYarn = fs.existsSync(path.join(appPath, 'yarn.lock'));
 
   // Copy over some of the devDependencies
-  appPackage.dependencies = appPackage.dependencies || {};
+  appPackage.dependencies = {
+    ...appPackage.dependencies,
+    'classnames': '^2.2.5',
+    'lodash': '^4.17.4',
+    'react-helmet': '^5.2.0',
+    'react-redux': '^5.0.6',
+    'react-router': '^3.2.0',
+    'react-router-redux': '^4.0.8',
+    'redux': '^3.7.2',
+    'redux-thunk': '^2.2.0',
+  };
+
+  appPackage.devDependencies = {
+    'babel-eslint': '^8.0.1',
+    'eslint': '^4.9.0',
+    'eslint-config-react-app': '^2.0.1',
+    'eslint-loader': '^1.9.0',
+    'eslint-plugin-flowtype': '^2.39.1',
+    'eslint-plugin-import': '^2.7.0',
+    'eslint-plugin-jsx-a11y': '^6.0.2',
+    'eslint-plugin-react': '^7.4.0',
+    'prop-types': '^15.6.0',
+  };
 
   // Setup the script rules
   appPackage.scripts = {
-    start: 'react-scripts start',
-    build: 'react-scripts build',
-    test: 'react-scripts test --env=jsdom',
-    eject: 'react-scripts eject',
+    start: 'redux-scripts start',
+    build: 'redux-scripts build',
+    test: 'redux-scripts test --env=jsdom',
+    eject: 'redux-scripts eject',
   };
 
   fs.writeFileSync(
@@ -91,6 +113,7 @@ module.exports = function(
 
   let command;
   let args;
+  let devArgs;
 
   if (useYarn) {
     command = 'yarnpkg';
@@ -99,6 +122,7 @@ module.exports = function(
     command = 'npm';
     args = ['install', '--save', verbose && '--verbose'].filter(e => e);
   }
+
   args.push('react', 'react-dom');
 
   // Install additional template dependencies, if present
@@ -117,10 +141,10 @@ module.exports = function(
   }
 
   // Install react and react-dom for backward compatibility with old CRA cli
-  // which doesn't install react and react-dom along with react-scripts
+  // which doesn't install react and react-dom along with redux-scripts
   // or template is presetend (via --internal-testing-template)
   if (!isReactInstalled(appPackage) || template) {
-    console.log(`Installing react and react-dom using ${command}...`);
+    console.log(`Installing dependencies using ${command}...`);
     console.log();
 
     const proc = spawn.sync(command, args, { stdio: 'inherit' });
