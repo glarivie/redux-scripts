@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { Flex } from '../../components'
+import { Flex } from 'components'
 import styles from './Home.scss'
 
 class Home extends Component {

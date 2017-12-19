@@ -5,7 +5,7 @@ import {
   App,
   Home,
   Page404,
-} from './containers'
+} from 'containers'
 
 export default (
   <Route path="/" component={App}>

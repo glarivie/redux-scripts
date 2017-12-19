@@ -5,8 +5,8 @@ import { connect } from 'react-redux'
 import { Helmet } from 'react-helmet'
 import { debounce } from 'lodash'
 
-import actions from '../../actions'
-import { Flex } from '../../components'
+import actions from 'actions'
+import { Flex } from 'components'
 
 import styles from './App.scss'
 
