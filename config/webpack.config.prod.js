@@ -36,6 +36,25 @@ const publicUrl = publicPath.slice(0, -1);
 // Get environment variables to inject into our app.
 const env = getClientEnvironment(publicUrl);
 
+const postCSSLoaderConfig = {
+  loader: require.resolve('postcss-loader'),
+  options: {
+    ident: 'postcss', // https://webpack.js.org/guides/migrating/#complex-options
+    plugins: () => [
+      require('postcss-flexbugs-fixes'),
+      autoprefixer({
+        browsers: [
+          '>1%',
+          'last 4 versions',
+          'Firefox ESR',
+          'not ie < 9', // React doesn't support IE8 anyway
+        ],
+        flexbox: 'no-2009',
+      }),
+    ],
+  },
+};
+
 // Assert this just to be safe.
 // Development builds of React are slow and not intended for production.
 if (env.stringified['process.env'].NODE_ENV !== '"production"') {
@@ -207,45 +226,50 @@ module.exports = {
           // use the "style" loader inside the async code so CSS from them won't be
           // in the main CSS file.
           {
-            test: /\.css$/,
+            test: /\.s?css$/,
+            include: paths.stylesSrc,
             loader: ExtractTextPlugin.extract(
               Object.assign(
                 {
-                  fallback: {
-                    loader: require.resolve('style-loader'),
-                    options: {
-                      hmr: false,
-                    },
-                  },
+                  fallback: require.resolve('style-loader'),
                   use: [
                     {
                       loader: require.resolve('css-loader'),
                       options: {
                         importLoaders: 1,
                         minimize: true,
-                        sourceMap: shouldUseSourceMap,
+                        sourceMap: true,
                       },
                     },
+                    postCSSLoaderConfig,
+                    require.resolve('sass-loader'),
+                  ],
+                },
+                extractTextPluginOptions
+              )
+            ),
+            // Note: this won't work without `new ExtractTextPlugin()` in `plugins`.
+          },
+          {
+            test: /\.s?css$/,
+            exclude: paths.stylesSrc,
+            loader: ExtractTextPlugin.extract(
+              Object.assign(
+                {
+                  fallback: require.resolve('style-loader'),
+                  use: [
                     {
-                      loader: require.resolve('postcss-loader'),
+                      loader: require.resolve('css-loader'),
                       options: {
-                        // Necessary for external CSS imports to work
-                        // https://github.com/facebookincubator/create-react-app/issues/2677
-                        ident: 'postcss',
-                        plugins: () => [
-                          require('postcss-flexbugs-fixes'),
-                          autoprefixer({
-                            browsers: [
-                              '>1%',
-                              'last 4 versions',
-                              'Firefox ESR',
-                              'not ie < 9', // React doesn't support IE8 anyway
-                            ],
-                            flexbox: 'no-2009',
-                          }),
-                        ],
+                        importLoaders: 1,
+                        minimize: true,
+                        sourceMap: true,
+                        modules: true,
+                        localIdentName:'[name]__[local]___[hash:base64:5]',
                       },
                     },
+                    postCSSLoaderConfig,
+                    require.resolve('sass-loader'),
                   ],
                 },
                 extractTextPluginOptions
