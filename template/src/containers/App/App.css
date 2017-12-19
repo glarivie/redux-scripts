@@ -1,6 +1,0 @@
-.App {
-  min-width: 100vw;
-  min-height: 100vh;
-  flex-direction: row; }
-  .App .content {
-    justify-content: space-between; }

@@ -1,7 +1,7 @@
 .App {
+  display: flex;
   min-width: 100vw;
   min-height: 100vh;
-  flex-direction: row;
 
   .content {
     justify-content: space-between;

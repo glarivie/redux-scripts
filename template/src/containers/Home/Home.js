@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { Flex } from '../../components'
-import './Home.css'
+import styles from './Home.scss'
 
 class Home extends Component {
   static propTypes = {
@@ -12,8 +12,8 @@ class Home extends Component {
   render = () => {
 
     return (
-      <Flex className="Home" column center>
-        <h1>Homepage</h1>
+      <Flex className={styles.Home} column center>
+        <h1 className={styles.title}>Homepage</h1>
       </Flex>
     )
   }

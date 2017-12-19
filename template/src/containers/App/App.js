@@ -8,7 +8,7 @@ import { debounce } from 'lodash'
 import actions from '../../actions'
 import { Flex } from '../../components'
 
-import './App.css'
+import styles from './App.scss'
 
 class App extends Component {
   static propTypes = {
@@ -39,7 +39,7 @@ class App extends Component {
 
     return (
       <div
-        className="App flex"
+        className={styles.App}
         ref={c => this._app = c}
       >
         <Helmet>
@@ -47,7 +47,7 @@ class App extends Component {
           <title>React Redux App</title>
         </Helmet>
 
-        <Flex className="content" column grow>
+        <Flex className={styles.content} column grow>
           {children}
         </Flex>
       </div>

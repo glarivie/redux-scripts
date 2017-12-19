@@ -1,0 +1,11 @@
+@import '~styles/shared/variables.scss';
+
+.Page404 {
+  width: 100%;
+
+  p.error {
+    font-weight: 400;
+    font-size: 25px;
+    color: $text;
+  }
+}
