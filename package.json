@@ -1,14 +1,14 @@
 {
   "name": "redux-scripts",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Configuration and scripts for Create React Redux App.",
-  "repository": "facebookincubator/create-react-app",
+  "repository": "hqro/redux-scripts",
   "license": "MIT",
   "engines": {
     "node": ">=6"
   },
   "bugs": {
-    "url": "https://github.com/facebookincubator/create-react-app/issues"
+    "url": "https://github.com/hqro/redux-scripts/issues"
   },
   "files": [
     "bin",
