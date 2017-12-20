@@ -4,7 +4,7 @@ create-react-app with Redux, SCSS modules and paths aliases without ejecting !
 
 ## How to use
 
-```
+```bash
 yarn add --global create-react-app
 create-react-app App --scripts-version redux-scripts
 cd App
