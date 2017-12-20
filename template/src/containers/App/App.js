@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { findDOMNode } from 'react-dom'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { Helmet } from 'react-helmet'
 import { get, debounce } from 'lodash'
 
 import actions from 'actions'
@@ -38,15 +37,7 @@ class App extends Component {
     const { children } = this.props
 
     return (
-      <div
-        className={styles.App}
-        ref={c => this._app = c}
-      >
-        <Helmet>
-          {/* TODO Title should be dynamic */}
-          <title>React Redux App</title>
-        </Helmet>
-
+      <div className={styles.App} ref={c => this._app = c}>
         <Flex className={styles.content} column grow>
           {children}
         </Flex>
