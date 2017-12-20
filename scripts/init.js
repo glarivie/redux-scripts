@@ -26,36 +26,13 @@ module.exports = function(
   originalDirectory,
   template
 ) {
-  const ownPackageName = require(path.join(__dirname, '..', 'package.json'))
-    .name;
-  const ownPath = path.join(appPath, 'node_modules', ownPackageName);
+  const { name } = require(path.join(__dirname, '..', 'package.json'));
+  const ownPath = path.join(appPath, 'node_modules', name);
   const appPackage = require(path.join(appPath, 'package.json'));
   const useYarn = fs.existsSync(path.join(appPath, 'yarn.lock'));
 
   // Copy over some of the devDependencies
-  appPackage.dependencies = {
-    ...appPackage.dependencies,
-    'classnames': '^2.2.5',
-    'lodash': '^4.17.4',
-    'react-helmet': '^5.2.0',
-    'react-redux': '^5.0.6',
-    'react-router': '^3.2.0',
-    'react-router-redux': '^4.0.8',
-    'redux': '^3.7.2',
-    'redux-thunk': '^2.2.0',
-  };
-
-  appPackage.devDependencies = {
-    'babel-eslint': '^8.0.1',
-    'eslint': '^4.9.0',
-    'eslint-config-react-app': '^2.0.1',
-    'eslint-loader': '^1.9.0',
-    'eslint-plugin-flowtype': '^2.39.1',
-    'eslint-plugin-import': '^2.7.0',
-    'eslint-plugin-jsx-a11y': '^6.0.2',
-    'eslint-plugin-react': '^7.4.0',
-    'prop-types': '^15.6.0',
-  };
+  appPackage.dependencies = appPackage.dependencies || {}
 
   // Setup the script rules
   appPackage.scripts = {
