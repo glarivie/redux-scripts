@@ -95,40 +95,59 @@ module.exports = function(
   if (useYarn) {
     command = 'yarnpkg';
     args = ['add'];
+    devArgs = ['add', '--dev'];
   } else {
     command = 'npm';
     args = ['install', '--save', verbose && '--verbose'].filter(e => e);
+    devArgs = ['install', '--save-dev', verbose && '--verbose'].filter(e => e);
   }
 
-  args.push('react', 'react-dom');
+  args.push(
+    'react',
+    'react-dom',
+    'lodash',
+    'react-redux',
+    'react-router@^3.2.0', // TODO replace with react-router v4
+    'redux',
+    'classnames',
+  );
+
+  devArgs.push(
+    'babel-eslint',
+    'eslint',
+    'eslint-config-react-app',
+    'eslint-loader',
+    'eslint-plugin-flowtype',
+    'eslint-plugin-import',
+    'eslint-plugin-jsx-a11y',
+    'eslint-plugin-react',
+    'prop-types',
+  );
 
   // Install additional template dependencies, if present
-  const templateDependenciesPath = path.join(
-    appPath,
-    '.template.dependencies.json'
-  );
+  const templateDependenciesPath = path.join(appPath, '.template.dependencies.json');
+
   if (fs.existsSync(templateDependenciesPath)) {
-    const templateDependencies = require(templateDependenciesPath).dependencies;
+    const { dependencies, devDependencies } = require(templateDependenciesPath);
+
     args = args.concat(
-      Object.keys(templateDependencies).map(key => {
-        return `${key}@${templateDependencies[key]}`;
+      Object.keys(dependencies).map(key => {
+        return `${key}@${dependencies[key]}`;
       })
     );
+
     fs.unlinkSync(templateDependenciesPath);
   }
 
   // Install react and react-dom for backward compatibility with old CRA cli
   // which doesn't install react and react-dom along with redux-scripts
   // or template is presetend (via --internal-testing-template)
-  if (!isReactInstalled(appPackage) || template) {
-    console.log(`Installing dependencies using ${command}...`);
-    console.log();
+  console.log(`Installing dependencies using ${command}...`);
 
-    const proc = spawn.sync(command, args, { stdio: 'inherit' });
-    if (proc.status !== 0) {
-      console.error(`\`${command} ${args.join(' ')}\` failed`);
-      return;
-    }
+  const proc = spawn.sync(command, args, { stdio: 'inherit' });
+  if (proc.status !== 0) {
+    console.error(`\`${command} ${args.join(' ')}\` failed`);
+    return;
   }
 
   // Display the most elegant way to cd.

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Provider } from 'react-redux'
 import { render } from 'react-dom'
-import { Router, history } from 'react-router'
+import { Router, browserHistory } from 'react-router'
 
 // Main stylesheets
 import './styles/index.css'
@@ -11,10 +11,7 @@ import router from './router'
 
 render(
   <Provider store={store}>
-    <Router
-      history={history}
-      routes={router}
-    />
+    <Router history={browserHistory} routes={router} />
   </Provider>,
   document.getElementById('root')
 )
