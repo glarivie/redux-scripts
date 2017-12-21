@@ -99,8 +99,8 @@ module.exports = (appPath, appName, verbose, originalDirectory, template) => {
   if (fs.existsSync(templateDependenciesPath)) {
     const { dependencies, devDependencies } = require(templateDependenciesPath)
 
-    args = args.concat(Object.keys(dependencies).map(key => `${key}@${dependencies[key]}`)
-    devArgs = devArgs.concat(Object.keys(devDependencies).map(key => `${key}@${devDependencies[key]}`)
+    args = args.concat(Object.keys(dependencies).map(key => `${key}@${dependencies[key]}`))
+    devArgs = devArgs.concat(Object.keys(devDependencies).map(key => `${key}@${devDependencies[key]}`))
 
     fs.unlinkSync(templateDependenciesPath)
   }
