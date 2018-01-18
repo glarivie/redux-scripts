@@ -265,7 +265,7 @@ module.exports = {
                         minimize: true,
                         sourceMap: true,
                         modules: true,
-                        localIdentName:'[name]__[local]___[hash:base64:5]',
+                        localIdentName:'[name]_[hash:base64:5]',
                       },
                     },
                     postCSSLoaderConfig,
