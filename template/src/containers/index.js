@@ -1,9 +1,9 @@
-import App from './App'
+import Router from './Router'
 import Page404 from './Page404'
 import Home from './Home'
 
 export {
-  App,
+  Router,
   Page404,
   Home,
 }

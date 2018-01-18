@@ -1,17 +1,17 @@
 import React, { Component } from 'react'
 import { findDOMNode } from 'react-dom'
+import { Route, Switch } from 'react-router-com'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { get, debounce } from 'lodash'
 
 import actions from 'actions'
-import { Flex } from 'components'
+import { Home, Page404 } from 'containers'
 
 import styles from './App.scss'
 
 class App extends Component {
   static propTypes = {
-    children: PropTypes.node,
     updateWindowWidth: PropTypes.func.isRequired,
     width: PropTypes.number.isRequired,
   }
@@ -33,21 +33,19 @@ class App extends Component {
 
   _debounceUpdate = debounce(this._updateWindowWidth, 250)
 
-  render () {
-    const { children } = this.props
-
-    return (
-      <div className={styles.App} ref={c => this._app = c}>
-        <Flex className={styles.content} column grow>
-          {children}
-        </Flex>
-      </div>
-    )
-  }
+  render = () => (
+    <div className={styles.App} ref={c => this._app = c}>
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route path="/404" component={Page404} />
+        <Route component={Page404} />
+      </Switch>
+    </div>
+  )
 }
 
 const mapStateToProps = ({ app }) => ({
-  width: get(app, 'width', 300),
+  width: get(app, 'width', 320),
 })
 
 const mapDispatchToProps = dispatch => ({

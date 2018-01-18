@@ -78,7 +78,9 @@ module.exports = (appPath, appName, verbose, originalDirectory, template) => {
       'react-dom',
       'lodash',
       'react-redux',
-      'react-router@^3.2.0', // TODO replace with react-router v4
+      'react-router-dom',
+      'react-router-redux',
+      'history',
       'redux',
       'classnames',
     )

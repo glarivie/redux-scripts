@@ -1,17 +1,20 @@
 import React from 'react'
-import { Provider } from 'react-redux'
 import { render } from 'react-dom'
-import { Router, browserHistory } from 'react-router'
+import { Provider } from 'react-redux'
+import { ConnectedRouter } from 'react-router-redux'
 
 // Main stylesheets
-import './styles/index.css'
+import '@/styles/index.css'
 
-import store from './configureStore'
-import router from './router'
+import Router from 'containers'
+import store from '@/store'
+import history from '@/history'
 
 render(
   <Provider store={store}>
-    <Router history={browserHistory} routes={router} />
+    <ConnectedRouter history={history}>
+      <Router />
+    </ConnectedRouter>
   </Provider>,
   document.getElementById('root')
 )
