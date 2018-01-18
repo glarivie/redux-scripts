@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { findDOMNode } from 'react-dom'
-import { Route, Switch } from 'react-router-com'
+import { Route, Switch } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { get, debounce } from 'lodash'
@@ -8,9 +8,9 @@ import { get, debounce } from 'lodash'
 import actions from 'actions'
 import { Home, Page404 } from 'containers'
 
-import styles from './App.scss'
+import styles from './Router.scss'
 
-class App extends Component {
+class Router extends Component {
   static propTypes = {
     updateWindowWidth: PropTypes.func.isRequired,
     width: PropTypes.number.isRequired,
@@ -34,7 +34,7 @@ class App extends Component {
   _debounceUpdate = debounce(this._updateWindowWidth, 250)
 
   render = () => (
-    <div className={styles.App} ref={c => this._app = c}>
+    <div className={styles.Router} ref={c => this._app = c}>
       <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/404" component={Page404} />
@@ -52,4 +52,4 @@ const mapDispatchToProps = dispatch => ({
   updateWindowWidth: width => dispatch(actions.app.updateWindowWidth(width)),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default connect(mapStateToProps, mapDispatchToProps)(Router)
