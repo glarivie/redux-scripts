@@ -6,7 +6,7 @@ import { ConnectedRouter } from 'react-router-redux'
 // Main stylesheets
 import '@/styles/index.css'
 
-import Router from 'containers'
+import { Router } from 'containers'
 import store from '@/store'
 import history from '@/history'
 
