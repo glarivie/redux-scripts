@@ -1,6 +1,6 @@
 {
   "name": "redux-scripts",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "Configuration and scripts for Create React Redux App.",
   "repository": "hqro/redux-scripts",
   "license": "MIT",

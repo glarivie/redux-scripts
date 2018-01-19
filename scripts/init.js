@@ -79,7 +79,7 @@ module.exports = (appPath, appName, verbose, originalDirectory, template) => {
       'lodash',
       'react-redux',
       'react-router-dom',
-      'react-router-redux',
+      'react-router-redux@next',
       'history',
       'redux',
       'classnames',
