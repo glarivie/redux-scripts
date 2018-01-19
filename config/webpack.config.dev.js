@@ -239,7 +239,7 @@ module.exports = {
                 options: {
                   importLoaders: 1,
                   modules: true,
-                  localIdentName:'[name]_[hash:base64:5]',
+                  localIdentName:'[local]_[hash:base64:5]',
                 },
               },
               postCSSLoaderConfig,
