@@ -112,10 +112,14 @@ module.exports = (appPath, appName, verbose, originalDirectory, template) => {
   // or template is presetend (via --internal-testing-template)
   console.log(`Installing dependencies using ${command}...`)
 
-  const { status } = spawn.sync(command, args, { stdio: 'inherit' })
+  const dependenciesInstall = spawn.sync(command, args, { stdio: 'inherit' })
+  const devDependenciesInstall = spawn.sync(command, devArgs, { stdio: 'inherit' })
 
-  if (status !== 0)
+  if (dependenciesInstall.status !== 0)
     return console.error(`"${command} ${args.join(' ')}" failed`)
+
+  if (devDependenciesInstall.status !== 0)
+    return console.error(`"${command} ${devArgs.join(' ')}" failed`)
 
   // Display the most elegant way to cd.
   // This needs to handle an undefined originalDirectory for
