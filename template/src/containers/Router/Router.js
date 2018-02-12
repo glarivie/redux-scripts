@@ -7,13 +7,14 @@ import { get, debounce } from 'lodash'
 
 import actions from 'actions'
 import { Home, Page404 } from 'containers'
+import { types, initialValues } from 'contants'
 
 import styles from './Router.scss'
 
 class Router extends Component {
   static propTypes = {
     updateWindowWidth: PropTypes.func.isRequired,
-    width: PropTypes.number.isRequired,
+    width: types.width,
   }
 
   componentDidMount = () => {
@@ -45,7 +46,7 @@ class Router extends Component {
 }
 
 const mapStateToProps = ({ app }) => ({
-  width: get(app, 'width', 320),
+  width: get(app, 'width', initialValues.width),
 })
 
 const mapDispatchToProps = dispatch => ({

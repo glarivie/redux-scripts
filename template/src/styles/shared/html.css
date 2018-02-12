@@ -5,19 +5,32 @@
   padding: 0;
 }
 
+html {
+  /* Prevent adjustments of font size after orientation changes in IE and iOS. */
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
 body {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
-  font-family: 'Segoe UI', 'Helvetica', 'Droid Sans', Arial, sans-serif;
-  font-weight: 300;
+  font-family: -apple-system, system-ui, "Segoe UI", Roboto, Ubuntu, Oxygen, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  letter-spacing: normal;
+  line-height: 1.15;
+  text-align: left;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
 }
 
 a {
+  background-color: transparent;
   text-decoration: none;
 }
 
-a:hover {
+a:active, a:hover {
   cursor: pointer;
+  text-decoration-skip: ink;
 }
 
 hr {
@@ -26,10 +39,6 @@ hr {
   width: 100%;
   border-width: 0;
   border-color: transparent;
-}
-
-strong {
-  font-weight: 900;
 }
 
 ul {
@@ -44,9 +53,29 @@ ul > li {
 }
 
 h1, h2, h3, h4, h5, h6, p {
+  font-weight: normal;
   margin: 0;
 }
 
-select {
-  outline: none;
+small {
+  font-size: 80%;
+}
+
+img {
+  border-style: none;
+}
+
+svg:not(:root) {
+  overflow: hidden;
+}
+
+code,
+kbd,
+pre,
+samp {
+  font-family: monospace, monospace;
+}
+
+textarea {
+  overflow: auto;
 }

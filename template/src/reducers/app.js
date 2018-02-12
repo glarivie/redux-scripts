@@ -1,7 +1,9 @@
 import { get } from 'lodash'
 
+import { initialValues } from 'contants'
+
 const initialState = {
-  width: 300,
+  width: initialValues.width,
 }
 
 const appReducer = (state = initialState, { type, payload }) => {
