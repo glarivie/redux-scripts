@@ -7,7 +7,7 @@ import { get, debounce } from 'lodash'
 
 import actions from 'actions'
 import { Home, Page404 } from 'containers'
-import { types, initialValues } from 'contants'
+import { types, initialValues } from 'constants'
 
 import styles from './Router.scss'
 

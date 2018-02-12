@@ -1,6 +1,6 @@
 import { get } from 'lodash'
 
-import { initialValues } from 'contants'
+import { initialValues } from 'constants'
 
 const initialState = {
   width: initialValues.width,
