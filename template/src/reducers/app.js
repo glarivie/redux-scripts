@@ -8,7 +8,7 @@ const initialState = {
 
 const appReducer = (state = initialState, { type, payload }) => {
   switch (type) {
-    case 'UPDATE_WINDOW_WIDTH':
+    case '@@APP/UPDATE_WINDOW_WIDTH':
       return ({
         ...state,
         width: get(payload, 'width', initialState.width),

@@ -1,0 +1,25 @@
+.Flex {
+  display: flex;
+
+  &.flexRow {
+    flex-direction: row;
+  }
+
+  &.flexColumn {
+    flex-direction: column;
+  }
+
+  &.flexCenter {
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+  }
+
+  &.flexGrow {
+    flex-grow: 1;
+  }
+
+  &.flexWrap {
+    flex-wrap: wrap;
+  }
+}

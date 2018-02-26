@@ -12,11 +12,10 @@ html {
 }
 
 body {
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
+  /* -webkit-font-smoothing: antialiased; */
+  /* text-rendering: optimizeLegibility; */
   font-family: -apple-system, system-ui, "Segoe UI", Roboto, Ubuntu, Oxygen, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   letter-spacing: normal;
-  line-height: 1.15;
   text-align: left;
   font-weight: normal;
   font-style: normal;

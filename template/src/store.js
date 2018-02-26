@@ -20,6 +20,6 @@ const store = createStore(
 
 // Enable Webpack hot module replacement for reducers
 if (module.hot)
-  module.hot.accept('./reducers', () => store.replaceReducer(reducers))
+  module.hot.accept('reducers', () => store.replaceReducer(reducers))
 
 export default store

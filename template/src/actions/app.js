@@ -1,5 +1,5 @@
 const updateWindowWidth = width => ({
-  type: 'UPDATE_WINDOW_WIDTH',
+  type: '@@APP/UPDATE_WINDOW_WIDTH',
   payload: { width },
 })
 

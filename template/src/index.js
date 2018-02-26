@@ -6,15 +6,19 @@ import { ConnectedRouter } from 'react-router-redux'
 // Main stylesheets
 import '@/styles/index.css'
 
-import { Router } from 'containers'
+import App from '@/containers/App'
 import store from '@/store'
 import history from '@/history'
 
 render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
-      <Router />
+      <App />
     </ConnectedRouter>
   </Provider>,
   document.getElementById('root')
 )
+
+// Webpack Hot Module Replacement API
+if (module.hot)
+  module.hot.accept('@/containers/App', () => render(App))
