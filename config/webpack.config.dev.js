@@ -8,7 +8,6 @@
 // @remove-on-eject-end
 'use strict';
 
-const autoprefixer = require('autoprefixer');
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -19,6 +18,7 @@ const eslintFormatter = require('react-dev-utils/eslintFormatter');
 const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
 const getClientEnvironment = require('./env');
 const paths = require('./paths');
+const aliases = requires('./aliases');
 
 // Webpack uses `publicPath` to determine where the app is being served from.
 // In development, we always serve from the root. This makes config easier.
@@ -29,25 +29,6 @@ const publicPath = '/';
 const publicUrl = '';
 // Get environment variables to inject into our app.
 const env = getClientEnvironment(publicUrl);
-
-const postCSSLoaderConfig = {
-  loader: require.resolve('postcss-loader'),
-  options: {
-    ident: 'postcss', // https://webpack.js.org/guides/migrating/#complex-options
-    plugins: () => [
-      require('postcss-flexbugs-fixes'),
-      autoprefixer({
-        browsers: [
-          '>1%',
-          'last 4 versions',
-          'Firefox ESR',
-          'not ie < 9', // React doesn't support IE8 anyway
-        ],
-        flexbox: 'no-2009',
-      }),
-    ],
-  },
-};
 
 // This is the development configuration.
 // It is focused on developer experience and fast rebuilds.
@@ -125,18 +106,7 @@ module.exports = {
       'react-native': 'react-native-web',
 
       // Alias for import
-      styles: paths.stylesSrc,
-      components: paths.componentsSrc,
-      constants: paths.constantsSrc,
-      containers: paths.containersSrc,
-      actions: paths.actionsSrc,
-      reducers: paths.reducersSrc,
-      helpers: paths.helpersSrc,
-      middlewares: paths.middlewaresSrc,
-      assets: paths.assetsSrc,
-
-      // Alias for src folder
-      '@': paths.appSrc,
+      ...aliases,
     },
     plugins: [
       // Prevents users from importing files from outside of src/ (or node_modules/).
@@ -210,26 +180,6 @@ module.exports = {
               plugins: ['react-hot-loader/babel'],
             },
           },
-          // "postcss" loader applies autoprefixer to our CSS.
-          // "css" loader resolves paths in CSS and adds assets as dependencies.
-          // "style" loader turns CSS into JS modules that inject <style> tags.
-          // In production, we use a plugin to extract that CSS to a file, but
-          // in development "style" loader enables hot editing of CSS.
-          {
-            test: /\.s?css$/,
-            include: paths.stylesSrc,
-            use: [
-              require.resolve('style-loader'),
-              {
-                loader: require.resolve('css-loader'),
-                options: {
-                  importLoaders: 1,
-                },
-              },
-              postCSSLoaderConfig,
-              require.resolve('sass-loader'),
-            ],
-          },
           {
             test: /\.s?css$/,
             exclude: paths.stylesSrc,
@@ -238,12 +188,10 @@ module.exports = {
               {
                 loader: require.resolve('css-loader'),
                 options: {
-                  importLoaders: 1,
                   modules: true,
                   localIdentName:'[local]_[hash:base64:5]',
                 },
               },
-              postCSSLoaderConfig,
               require.resolve('sass-loader'),
             ],
           },

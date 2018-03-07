@@ -8,7 +8,6 @@
 // @remove-on-eject-end
 'use strict';
 
-const autoprefixer = require('autoprefixer');
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -20,6 +19,7 @@ const eslintFormatter = require('react-dev-utils/eslintFormatter');
 const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
 const paths = require('./paths');
 const getClientEnvironment = require('./env');
+const aliases = requires('./aliases');
 
 // Webpack uses `publicPath` to determine where the app is being served from.
 // It requires a trailing slash, or the file assets will get an incorrect path.
@@ -35,25 +35,6 @@ const shouldUseSourceMap = process.env.GENERATE_SOURCEMAP !== 'false';
 const publicUrl = publicPath.slice(0, -1);
 // Get environment variables to inject into our app.
 const env = getClientEnvironment(publicUrl);
-
-const postCSSLoaderConfig = {
-  loader: require.resolve('postcss-loader'),
-  options: {
-    ident: 'postcss', // https://webpack.js.org/guides/migrating/#complex-options
-    plugins: () => [
-      require('postcss-flexbugs-fixes'),
-      autoprefixer({
-        browsers: [
-          '>1%',
-          'last 4 versions',
-          'Firefox ESR',
-          'not ie < 9', // React doesn't support IE8 anyway
-        ],
-        flexbox: 'no-2009',
-      }),
-    ],
-  },
-};
 
 // Assert this just to be safe.
 // Development builds of React are slow and not intended for production.
@@ -131,18 +112,7 @@ module.exports = {
       'react-native': 'react-native-web',
 
       // Alias for import
-      styles: paths.stylesSrc,
-      components: paths.componentsSrc,
-      constants: paths.constantsSrc,
-      containers: paths.containersSrc,
-      actions: paths.actionsSrc,
-      reducers: paths.reducersSrc,
-      helpers: paths.helpersSrc,
-      middlewares: paths.middlewaresSrc,
-      assets: paths.assetsSrc,
-
-      // Alias for src folder
-      '@': paths.appSrc,
+      ...aliases,
     },
     plugins: [
       // Prevents users from importing files from outside of src/ (or node_modules/).
@@ -213,43 +183,6 @@ module.exports = {
               compact: true,
             },
           },
-          // The notation here is somewhat confusing.
-          // "postcss" loader applies autoprefixer to our CSS.
-          // "css" loader resolves paths in CSS and adds assets as dependencies.
-          // "style" loader normally turns CSS into JS modules injecting <style>,
-          // but unlike in development configuration, we do something different.
-          // `ExtractTextPlugin` first applies the "postcss" and "css" loaders
-          // (second argument), then grabs the result CSS and puts it into a
-          // separate file in our build process. This way we actually ship
-          // a single CSS file in production instead of JS code injecting <style>
-          // tags. If you use code splitting, however, any async bundles will still
-          // use the "style" loader inside the async code so CSS from them won't be
-          // in the main CSS file.
-          {
-            test: /\.s?css$/,
-            include: paths.stylesSrc,
-            loader: ExtractTextPlugin.extract(
-              Object.assign(
-                {
-                  fallback: require.resolve('style-loader'),
-                  use: [
-                    {
-                      loader: require.resolve('css-loader'),
-                      options: {
-                        importLoaders: 1,
-                        minimize: true,
-                        sourceMap: true,
-                      },
-                    },
-                    postCSSLoaderConfig,
-                    require.resolve('sass-loader'),
-                  ],
-                },
-                extractTextPluginOptions
-              )
-            ),
-            // Note: this won't work without `new ExtractTextPlugin()` in `plugins`.
-          },
           {
             test: /\.s?css$/,
             exclude: paths.stylesSrc,
@@ -261,14 +194,12 @@ module.exports = {
                     {
                       loader: require.resolve('css-loader'),
                       options: {
-                        importLoaders: 1,
                         minimize: true,
                         sourceMap: true,
                         modules: true,
                         localIdentName:'[local]_[hash:base64:5]',
                       },
                     },
-                    postCSSLoaderConfig,
                     require.resolve('sass-loader'),
                   ],
                 },
