@@ -89,7 +89,6 @@ module.exports = (appPath, appName, verbose, originalDirectory, template) => {
       'babel-eslint',
       'eslint',
       'eslint-config-react-app',
-      'eslint-loader',
       'eslint-plugin-flowtype',
       'eslint-plugin-import',
       'eslint-plugin-jsx-a11y',

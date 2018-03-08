@@ -180,6 +180,20 @@ module.exports = {
               plugins: ['react-hot-loader/babel'],
             },
           },
+          // "postcss" loader applies autoprefixer to our CSS.
+          // "css" loader resolves paths in CSS and adds assets as dependencies.
+          // "style" loader turns CSS into JS modules that inject <style> tags.
+          // In production, we use a plugin to extract that CSS to a file, but
+          // in development "style" loader enables hot editing of CSS.
+          {
+            test: /\.s?css$/,
+            include: paths.stylesSrc,
+            use: [
+              require.resolve('style-loader'),
+              require.resolve('css-loader'),
+              require.resolve('sass-loader'),
+            ],
+          },
           {
             test: /\.s?css$/,
             exclude: paths.stylesSrc,

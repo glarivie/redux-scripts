@@ -1,5 +1,6 @@
 import { createStore, applyMiddleware, compose } from 'redux'
 import { routerMiddleware } from 'react-router-redux'
+import thunkMiddleware from 'redux-thunk'
 
 import reducers from 'reducers'
 import history from '@/history'
@@ -13,6 +14,7 @@ const store = createStore(
   compose(
     applyMiddleware(
       routerMiddleware(history),
+      thunkMiddleware,
     ),
     devToolsExtension && isDevelopment ? devToolsExtension() : f => f,
   ),
