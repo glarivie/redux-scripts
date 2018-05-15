@@ -1,0 +1,34 @@
+@import '~styles/shared/variables.scss';
+
+@mixin breakpoint ($point) {
+  @if $point == mobile {
+    @media (max-width: 415px)  { @content; }
+  }
+  @else if $point == tablet {
+    @media (max-width: 1024px)  { @content; }
+  }
+}
+
+@mixin font ($size, $weight, $color: $black) {
+  font-family: Helvetica, sans-serif;
+  color: $color;
+  font-size: $size;
+  font-weight: $weight;
+  line-height: normal;
+}
+
+@mixin flex ($direction: row) {
+  display: flex;
+  flex-direction: $direction;
+}
+
+@mixin align ($justify: inherit, $content: inherit, $items: inherit) {
+  justify-content: $justify;
+  align-content: $content;
+ align-items: $items;
+}
+
+@mixin size ($width, $height) {
+  width: $width;
+  height: $height;
+}

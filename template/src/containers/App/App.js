@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
-import { findDOMNode } from 'react-dom'
-import PropTypes from 'prop-types'
+import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { get, debounce } from 'lodash'
 
-import actions from 'actions'
+import { mapDispatchToProps } from 'helpers'
 import { Router } from 'containers'
 import { types, initialValues } from 'constants'
 
@@ -12,8 +11,9 @@ import styles from './App.scss'
 
 class App extends Component {
   static propTypes = {
-    updateWindowWidth: PropTypes.func.isRequired,
-    width: types.width,
+    location: types.location,
+    dimensions: types.dimensions,
+    actions: types.actions,
   }
 
   componentDidMount = () => {
@@ -24,14 +24,14 @@ class App extends Component {
   componentWillUnmount = () =>
     window.removeEventListener('resize', this._debounceUpdate)
 
-  _updateWindowWidth = () => {
-    const { updateWindowWidth } = this.props
-    const { width } = findDOMNode(this._app).getBoundingClientRect()
+  _updateAppDimensions = () => {
+    const { actions } = this.props
+    const { width } = document.body.getBoundingClientRect()
 
-    updateWindowWidth(width)
+    actions.app.updateAppDimensions({ width, height: window.screen.height })
   }
 
-  _debounceUpdate = debounce(this._updateWindowWidth, 250)
+  _debounceUpdate = debounce(this._updateAppDimensions, 250)
 
   render = () => (
     <div className={styles.App} ref={c => this._app = c}>
@@ -40,12 +40,9 @@ class App extends Component {
   )
 }
 
-const mapStateToProps = ({ app }) => ({
-  width: get(app, 'width', initialValues.width),
+const mapStateToProps = ({ app, router }) => ({
+  dimensions: get(app, 'dimensions', initialValues.dimensions),
+  location: get(router, 'location', initialValues.location),
 })
 
-const mapDispatchToProps = dispatch => ({
-  updateWindowWidth: width => dispatch(actions.app.updateWindowWidth(width)),
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App))

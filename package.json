@@ -1,11 +1,11 @@
 {
   "name": "redux-scripts",
-  "version": "2.2.4",
+  "version": "3.0.1",
   "description": "Configuration and scripts for Create React Redux App.",
   "repository": "hqro/redux-scripts",
   "license": "MIT",
   "engines": {
-    "node": ">=6"
+    "node": ">=8"
   },
   "bugs": {
     "url": "https://github.com/hqro/redux-scripts/issues"
@@ -59,8 +59,9 @@
     "whatwg-fetch": "2.0.3"
   },
   "devDependencies": {
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0"
+    "lodash-webpack-plugin": "^0.11.4",
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2"
   },
   "optionalDependencies": {
     "fsevents": "1.1.2"

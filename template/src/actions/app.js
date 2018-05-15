@@ -1,8 +1,8 @@
-const updateWindowWidth = width => ({
-  type: '@@APP/UPDATE_WINDOW_WIDTH',
-  payload: { width },
+const updateAppDimensions = dimensions => ({
+  type: 'UPDATE_APP_DIMENSIONS',
+  payload: { dimensions },
 })
 
-export default {
-  updateWindowWidth,
+export {
+  updateAppDimensions,
 }

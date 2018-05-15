@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+// import PropTypes from 'prop-types'
 
 import { Flex } from 'components'
+import { types } from 'constants'
 import styles from './Home.scss'
 
 class Home extends Component {
   static propTypes = {
-    location: PropTypes.object.isRequired,
+    location: types.location,
   }
 
   render = () => {

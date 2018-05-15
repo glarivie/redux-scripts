@@ -5,7 +5,7 @@ import styles from './Page404.scss'
 
 const Page404 = () => (
   <Flex className={styles.Page404} column center>
-    <p className="error">Page not found</p>
+    <p className={styles.error}>Page not found</p>
   </Flex>
 )
 
