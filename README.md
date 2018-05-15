@@ -6,8 +6,8 @@
 
 ```bash
 yarn add --global create-react-app
-create-react-app Demo --scripts-version redux-scripts
-cd Demo
+create-react-app demo --scripts-version redux-scripts
+cd demo
 yarn start
 ```
 

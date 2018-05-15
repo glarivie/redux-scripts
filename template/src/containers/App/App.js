@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
-import { connect } from 'react-redux'
 import { get, debounce } from 'lodash'
 
-import { mapDispatchToProps } from 'helpers'
+import { connect } from 'helpers'
 import { Router } from 'containers'
 import { types, initialValues } from 'constants'
 
@@ -45,4 +44,4 @@ const mapStateToProps = ({ app, router }) => ({
   location: get(router, 'location', initialValues.location),
 })
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App))
+export default withRouter(connect(mapStateToProps)(App))

@@ -72,7 +72,7 @@ module.exports = (appPath, appName, verbose, originalDirectory, template) => {
   })
 
   const command = useYarn ? 'yarn' : 'npm'
-  const args = (useYarn ? ['add'] : ['install', '--save', verbose && '--verbose'])
+  const args = (useYarn ? ['add', '--ignore-engines'] : ['install', '--save', verbose && '--verbose'])
     .concat(
       'react',
       'react-dom',
@@ -82,9 +82,10 @@ module.exports = (appPath, appName, verbose, originalDirectory, template) => {
       'react-router-redux@next',
       'history',
       'redux',
+      'redux-thunk',
       'classnames',
     )
-  const devArgs = (useYarn ? ['add', '--dev'] : ['install', '--save-dev', verbose && '--verbose'])
+  const devArgs = (useYarn ? ['add', '--dev', '--ignore-engines'] : ['install', '--save-dev', verbose && '--verbose'])
     .concat(
       'babel-eslint',
       'eslint',
