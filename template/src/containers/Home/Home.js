@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
-// import PropTypes from 'prop-types'
+import get from 'lodash/get'
 
 import { Flex } from 'components'
-import { types } from 'constants'
+import { initialValues, types } from 'constants'
+import { connect } from 'helpers'
+
 import styles from './Home.scss'
 
 class Home extends Component {
@@ -22,4 +24,8 @@ class Home extends Component {
   }
 }
 
-export default Home
+const mapStateToProps = ({ router }) => ({
+  location: get(router, 'location', initialValues.location),
+})
+
+export default connect(mapStateToProps)(Home)

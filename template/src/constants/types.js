@@ -22,9 +22,12 @@ const actions = shape({
   router: objectOf(func).isRequired,
 })
 
+const locale = string.isRequired
+
 export {
   dimensions,
   is,
   location,
   actions,
+  locale,
 }

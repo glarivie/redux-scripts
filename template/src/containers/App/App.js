@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
-import { get, debounce } from 'lodash'
+import { Flex } from '@hqro/gojji'
+import debounce from 'lodash/debounce'
+import get from 'lodash/get'
 
 import { connect } from 'helpers'
 import { Router } from 'containers'
@@ -16,8 +18,12 @@ class App extends Component {
   }
 
   componentDidMount = () => {
+    const { actions } = this.props
+
     this._debounceUpdate()
     window.addEventListener('resize', this._debounceUpdate)
+
+    return actions.app.detectBrowserLocale()
   }
 
   componentWillUnmount = () =>
@@ -26,16 +32,17 @@ class App extends Component {
   _updateAppDimensions = () => {
     const { actions } = this.props
     const { width } = document.body.getBoundingClientRect()
+    const { height } = window.screen
 
-    actions.app.updateAppDimensions({ width, height: window.screen.height })
+    return actions.app.updateAppDimensions({ width, height })
   }
 
   _debounceUpdate = debounce(this._updateAppDimensions, 250)
 
   render = () => (
-    <div className={styles.App} ref={c => this._app = c}>
+    <Flex className={styles.App}>
       <Router />
-    </div>
+    </Flex>
   )
 }
 
