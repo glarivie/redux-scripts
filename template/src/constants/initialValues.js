@@ -10,14 +10,16 @@ const is = {
 }
 
 const location = {
-  pathname: '',
+  pathname: '/',
   search: '',
   hash: '',
 }
 
+const locale = 'fr'
 
 export {
   dimensions,
   is,
   location,
+  locale,
 }

@@ -1,5 +1,5 @@
 import { createStore, applyMiddleware, compose } from 'redux'
-import { routerMiddleware } from 'react-router-redux'
+import { connectRouter, routerMiddleware } from 'connected-react-router'
 import thunkMiddleware from 'redux-thunk'
 
 import { requestMiddleware } from 'middlewares'
@@ -10,7 +10,7 @@ import history from '@/history'
 const { devToolsExtension } = window
 
 const store = createStore(
-  reducers,
+  connectRouter(history)(reducers),
   undefined, // Initial state
   compose(
     applyMiddleware(
@@ -24,6 +24,6 @@ const store = createStore(
 
 // Enable Webpack hot module replacement for reducers
 if (module.hot)
-  module.hot.accept('reducers', () => store.replaceReducer(reducers))
+  module.hot.accept('reducers', () => store.replaceReducer(connectRouter(history)(reducers)))
 
 export default store

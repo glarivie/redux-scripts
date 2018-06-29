@@ -1,15 +1,16 @@
 import get from 'lodash/get'
 
 import { initialValues } from 'constants'
-// import { Updater } from 'helpers'
+import { Updater } from 'helpers'
 
 const initialState = {
   dimensions: initialValues.dimensions,
   is: initialValues.is,
+  locale: initialValues.locale,
 }
 
 const appReducer = (state = initialState, { type, payload }) => {
-  // const { update, from } = new Updater(initialState, state)
+  const { update, from } = new Updater(initialState, state)
 
   switch (type) {
     case 'UPDATE_APP_DIMENSIONS': {
@@ -25,6 +26,8 @@ const appReducer = (state = initialState, { type, payload }) => {
         },
       }
     }
+    case 'DETECT_BROWSER_LOCALE':
+      return update('locale')(from(payload, 'locale'))
     default:
       return state
   }
