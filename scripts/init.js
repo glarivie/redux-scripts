@@ -92,10 +92,10 @@ module.exports = function(
 
   // Setup the script rules
   appPackage.scripts = {
-    start: 'react-scripts start',
-    build: 'react-scripts build',
-    test: 'react-scripts test --env=jsdom',
-    eject: 'react-scripts eject',
+    start: 'redux-scripts start',
+    build: 'redux-scripts build',
+    test: 'redux-scripts test --env=jsdom',
+    eject: 'redux-scripts eject',
   };
 
   appPackage.browserslist = defaultBrowsers;
@@ -162,13 +162,13 @@ module.exports = function(
     )
   const devArgs = (useYarn ? ['add', '--dev', '--ignore-engines'] : ['install', '--save-dev', verbose && '--verbose'])
     .concat(
-      'babel-eslint',
-      'eslint',
-      'eslint-config-react-app',
-      'eslint-plugin-flowtype',
-      'eslint-plugin-import',
-      'eslint-plugin-jsx-a11y',
-      'eslint-plugin-react',
+      // 'babel-eslint',
+      // 'eslint',
+      // 'eslint-config-react-app',
+      // 'eslint-plugin-flowtype',
+      // 'eslint-plugin-import',
+      // 'eslint-plugin-jsx-a11y',
+      // 'eslint-plugin-react',
       'prop-types',
     )
 
@@ -187,18 +187,18 @@ module.exports = function(
   }
 
   // Install react and react-dom for backward compatibility with old CRA cli
-  // which doesn't install react and react-dom along with react-scripts
+  // which doesn't install react and react-dom along with redux-scripts
   // or template is presetend (via --internal-testing-template)
-  if (!isReactInstalled(appPackage) || template) {
-    console.log(`Installing react and react-dom using ${command}...`);
-    console.log();
+  console.log(`Installing dependencies using ${command}...`)
 
-    const proc = spawn.sync(command, args, { stdio: 'inherit' });
-    if (proc.status !== 0) {
-      console.error(`\`${command} ${args.join(' ')}\` failed`);
-      return;
-    }
-  }
+  const dependenciesInstall = spawn.sync(command, args, { stdio: 'inherit' })
+  const devDependenciesInstall = spawn.sync(command, devArgs, { stdio: 'inherit' })
+
+  if (dependenciesInstall.status !== 0)
+    return console.error(`"${command} ${args.join(' ')}" failed`)
+
+  if (devDependenciesInstall.status !== 0)
+    return console.error(`"${command} ${devArgs.join(' ')}" failed`)
 
   if (tryGitInit(appPath)) {
     console.log();

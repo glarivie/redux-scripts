@@ -8,7 +8,7 @@ import { connect } from 'helpers'
 import { Router } from 'containers'
 import { types, initialValues } from 'constants'
 
-import styles from './App.scss'
+import styles from './App.module.scss'
 
 class App extends Component {
   static propTypes = {

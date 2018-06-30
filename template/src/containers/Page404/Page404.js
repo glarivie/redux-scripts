@@ -1,7 +1,7 @@
 import React from 'react'
+import { Flex } from '@hqro/gojji'
 
-import { Flex } from 'components'
-import styles from './Page404.scss'
+import styles from './Page404.module.scss'
 
 const Page404 = () => (
   <Flex className={styles.Page404} column center>
